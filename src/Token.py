@@ -1,10 +1,8 @@
-import TokenType
+from TokenType import TokenType
 
 
 class Token:
-    def __init__(
-        self, type: TokenType.TokenType, lexeme: str, literal: object, line: int
-    ):
+    def __init__(self, type: TokenType, lexeme: str, literal: object, line: int):
         self.type = type
         self.lexeme = lexeme
         self.literal = literal
