@@ -1,61 +1,22 @@
 import sys
-from typing import List
-import my_token
-import my_scanner
+import Lox
 
 # Exit codes
 EX_USAGE = 64
-EX_DATAERR = 65
-
 # global variables
 global had_error
 had_error: bool = False
 
 
 def main():
+    lox = Lox.Lox()
     if len(sys.argv) > 2:
         print("Usage: python main.py <input_file>")
         sys.exit(EX_USAGE)
     elif len(sys.argv) == 2:
-        run_file(sys.argv[1])
+        lox.run_file(sys.argv[1])
     else:
-        run_prompt()
-
-
-def run_prompt():
-    while True:
-        input_str = input("> ")
-        if input_str == "exit()":
-            break
-        run(input_str)
-
-
-def run_file(run_file: str):
-    read_bytes: bytes
-    with open(run_file, "rb") as file:
-        read_bytes = file.read()
-        run(str(read_bytes, "utf-8"))
-    if had_error:
-        sys.exit(EX_DATAERR)
-
-
-def run(source: str):
-    scanner = my_scanner.Scanner(source)
-    tokens: List[my_token.Token] = scanner.scan_tokens()
-
-    for token in tokens:
-        print(token)
-
-
-def error(line: int, message: str):
-    report(line, "", message)
-
-
-def report(line: int, where: str, message: str):
-    print(f"[line {line}] Error{where}: {message}")
-
-    global had_error
-    had_error = True
+        lox.run_prompt()
 
 
 if __name__ == "__main__":
