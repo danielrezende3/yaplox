@@ -3,11 +3,19 @@ from typing import List
 import my_token
 import my_scanner
 
+# Exit codes
+EX_USAGE = 64
+EX_DATAERR = 65
+
+# global variables
+global had_error
+had_error: bool = False
+
 
 def main():
     if len(sys.argv) > 2:
         print("Usage: python main.py <input_file>")
-        sys.exit(1)
+        sys.exit(EX_USAGE)
     elif len(sys.argv) == 2:
         run_file(sys.argv[1])
     else:
@@ -22,11 +30,13 @@ def run_prompt():
         run(input_str)
 
 
-def run_file(run_file):
+def run_file(run_file: str):
     read_bytes: bytes
     with open(run_file, "rb") as file:
         read_bytes = file.read()
         run(str(read_bytes, "utf-8"))
+    if had_error:
+        sys.exit(EX_DATAERR)
 
 
 def run(source: str):
@@ -43,6 +53,9 @@ def error(line: int, message: str):
 
 def report(line: int, where: str, message: str):
     print(f"[line {line}] Error{where}: {message}")
+
+    global had_error
+    had_error = True
 
 
 if __name__ == "__main__":
