@@ -1,6 +1,7 @@
 import sys
 from typing import List
-
+import Token
+import Scanner
 # Exit codes
 EX_DATAERR = 65
 
@@ -25,12 +26,11 @@ class Lox:
             sys.exit(EX_DATAERR)
 
     def run(self, source: str):
-        # scanner = my_scanner.Scanner(source)
-        # tokens: List[my_token.Token] = scanner.scan_tokens()
+        scanner = Scanner.Scanner(source)
+        tokens: List[Token.Token] = scanner.scan_tokens()
 
-        # for token in tokens:
-        #     print(token)
-        pass
+        for token in tokens:
+            print(token)
 
     def error(self, line: int, message: str):
         self.report(line, "", message)
