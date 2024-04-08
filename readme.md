@@ -1,6 +1,6 @@
 # yaplox - yet another python lox interpreter
 
-This is my version of the python implementation of the book [https://craftinginterpreters.com/](crafting interpreters)
+This is my version of the python implementation of the book [crafting interpreters](https://craftinginterpreters.com/)
 
 ## Objetives
 
