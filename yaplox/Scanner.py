@@ -93,7 +93,7 @@ class Scanner:
         text: str = self.source[self.start : self.current]
         token_type: TokenType = Keywords.keywords.get(text, TokenType.IDENTIFIER)
 
-        if token_type == None:
+        if token_type is None:
             token_type = TokenType.IDENTIFIER
 
         self.add_token(TokenType.IDENTIFIER)
